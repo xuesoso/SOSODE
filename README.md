@@ -1,6 +1,6 @@
 SOSODE: A speedy environment for interactive data science.
 =======================================================
-SOSODE is a neovim-based development environment for interactive data analysis and scripting. It combines the performance and flexibility of vim with the enriched functionality of Jupyter by hacking together a list of tools developed by others. Here, I provide an set-up instruction and a list of configuration files to make it easy to transition from Jupyter-notebook / Jupyter-lab environment.
+SOSODE is a neovim-based development environment for interactive data analysis and scripting. It combines the performance and flexibility of vim with the enriched functionality of Jupyter by hacking together a list of tools developed by others. Here, I provide a setup guide and a list of configurations to make it easy to transition from Jupyter-notebook / Jupyter-lab environment.
 
 \
 **Screenshot of SOSODE**
@@ -20,7 +20,7 @@ Installation
 ------------
 Clone this repository to a directory where you can work with.
 ```bash
-git clone 
+git clone https://github.com/xuesoso/SOSODE
 ```
 
 
@@ -58,12 +58,13 @@ pip install jupytext pynvim
 ```
 
 ### Jupyter installation
-If you use anaconda distribution, typically the followings two might already be installed. If not, copy and paste
+If you use anaconda distribution, typically the following jupyter frontends might already be installed. If not, copy and paste
 ```bash
 conda install -c conda-forge jupyter-console && conda install qtconsole
 ```
 
-### Summary of configuration
+Configuration
+-------------
 We can easily link up your existing vimrc configuration to neovim. Just copy over my nvim configuration files over. You can paste and execute the following line in terminal.
 
 ```bash
@@ -116,10 +117,10 @@ Notebook is automatically converted to an instance of markdown, where cell struc
 Just save as usual in vim (:w<CR>). Jupytext will update the original .ipynb file with changes made in the markdown buffer without altering the outputs in the notebook.
 
 ### Interactive iPython
-#### Run current line with Alt-d
+#### Execute current line with Alt-d
 By default, pressing Alt-d key will submit the current line of code to an ipython kernel, initiating an instance if it does not yet already exist for your current file. This is done via iron.nvim, and it will automatically detect the current environment you are in.
 
-#### Run entire cell block with Alt-s
+#### Execute entire cell block with Alt-s
 By default, pressing Alt-s will submit the entire cell block for execution.
 
 #### Inline plots
