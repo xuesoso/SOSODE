@@ -124,5 +124,5 @@ In either your script or jupyter console, you can invoke inline plotting by call
 %matplotlib inline
 %qtconsole
 ```
-This will link an instance of jupyter-qtconsole linked to the same ipython kernel and allows inline display of figures. You can also save all the interactions as html using the embedded jupyter-qtconsole function.
+This will link an instance of jupyter-qtconsole to ipython kernel and allows inline display of figures. You can also save all the interactions as html using the embedded jupyter-qtconsole function.
 
