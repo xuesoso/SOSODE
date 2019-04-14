@@ -90,6 +90,7 @@ fi
 In nvim, install plugins and run checkhealth
 ```vim
 :PluginInstall<CR>
+:UpdateRemotePlugins<CR>
 :checkhealth<CR>
 ```
 
