@@ -54,13 +54,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 Next, you will need to install jupytext and pynvim with pip (Python 3)
 ```bash
-pip install jupytext pynvim
-```
-
-### Jupyter installation
-If you use anaconda distribution, typically the following jupyter frontends might already be installed. If not, copy and paste
-```bash
-conda install -c conda-forge jupyter-console && conda install qtconsole
+pip install jupytext pynvim jupyter-console qtconsole
 ```
 
 Configuration
@@ -68,13 +62,13 @@ Configuration
 We can easily link up your existing vimrc configuration to neovim. Just copy over my nvim configuration files over. You can paste and execute the following line in terminal.
 
 ```bash
-cp -r .config ~/.config
+cp -r .config/* ~/.config
 ```
 
 I modified jupyter console to suppress image output when using the inline magic in jupyter console, that way the images don't clump up your whole screen. Include this in your jupyter folder
 
 ```bash
-mkdir -p ~/.jupyter && cp -r .jupyter/ ~/.jupyter/
+mkdir -p ~/.jupyter && cp -r .jupyter/* ~/.jupyter/
 ```
 
 **Optional:** I add in my .bashrc or .bash_profile with an alias to call neovim with "v".
@@ -86,9 +80,9 @@ Finally, to set up the proper plugins you will append my vimrc lines to your own
 ```bash
 if [ -e ~/.vimrc ]
 then
-    cp SOSODE_vimrc ~/.vimrc
-else
     cat SOSODE_vimrc >> ~/.vimrc
+else
+    cp SOSODE_vimrc ~/.vimrc
 fi
 ```
 
