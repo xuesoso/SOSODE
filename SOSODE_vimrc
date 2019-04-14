@@ -1,0 +1,135 @@
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Python folding script
+Plugin 'kalekundert/vim-coiled-snake'
+Plugin 'Konfekt/FastFold'
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Load Indentpython
+Plugin 'vim-scripts/indentpython.vim'
+
+" Load indentation checker
+Plugin 'nvie/vim-flake8'
+
+" Load deoplete autocompletor
+Plugin 'Shougo/deoplete.nvim'
+
+" Load indentLine - displays indentation guide and line
+Plugin 'Yggdroot/indentLine'
+
+" Load iron vim
+Plugin 'Vigemus/iron.nvim'
+
+" Load jupytext
+Plugin 'goerz/jupytext.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+"""" 1. Vim Behaviour.
+" Use filetype-based syntax hilighting, ftplugins, and indentation.
+syntax on
+set nocompatible
+filetype plugin indent on
+set background=dark
+set scrolloff=2
+set backspace=2
+set clipboard+=unnamedplus
+set smartcase
+set wildmode=longest,list
+set rnu
+autocmd FileType python setlocal colorcolumn=80
+autocmd FileType markdown let g:indentLine_enabled=0
+
+" Allows us to use Ctrl-s and Ctrl-q as keybinds
+silent !stty -ixon
+" Restore default behavior when leaving vim
+autocmd VimLeave * silent !stty ixon
+
+
+" Use numbering. Don't use relative numbering as this is slow (especially in
+" .tex files).
+set number
+
+" Enables mouse support. Note that on Mac OS X this doesn't work well on the
+" default terminal.
+set mouse=a
+
+" Enable folding
+setlocal foldmethod=indent
+set foldlevel=1
+set foldnestmax=2
+
+" Enable cursor highlighting
+:nnoremap <Leader>c :set cursorline!<CR>
+set cursorline!
+
+" UTF-8 encoding
+set encoding=utf-8
+
+" Set the filetype based on the file's extension, overriding any
+" 'filetype' that has already been set
+autocmd BufNewFile,BufRead *.ipynb,*.py set syntax=python
+let g:jupytext_filetype_map = {'md': 'python'}
+let g:jupytext_to_ipynb_opts = '--to=ipynb --update'
+autocmd BufNewFile,BufRead *.md set filetype=tex
+
+" Set indentLine conceal level
+let g:indentLine_conceallevel = "0"
+set conceallevel=0
+
+" Run vim_coiled_snake on start up
+let b:vim_coiled_snake_loaded = 1
+
+" Run deoplete on start up
+let g:deoplete#enable_at_startup = 1
+" Let <Tab> also do completion
+inoremap <silent><expr> <Tab>
+\ pumvisible() ? "\<C-n>" :
+\ deoplete#mappings#manual_complete()
+let g:deoplete#skip_chars = ['(', ')', ' ']
+" Close the documentation window when completion is done
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" Turn off preview window
+set completeopt-=preview
+
+" I bind <A-d> to automatically execute iron.nvim code
+" on the current line in normal mode, or to all the highlighted
+" lines in visual mode (automatically jumping to the end of the
+" unfinished line)
+" I also bind <Alt-s> to automatically run the current cell,
+" defined in .ipynb as the code between ```python and ```
+" We redefine Alt-s
+autocmd FileType python nmap <A-d> 0v$ctr<Esc>0
+autocmd FileType python imap <A-d> <Esc>0v$ctr<Esc>0
+autocmd FileType python vmap <A-d> $ctr<Esc>
+autocmd FileType python nmap <silent> <A-s> m0?```python<CR>jv/```<CR>k$ctr<Esc>:noh<CR>G<C-k>`0:delmarks 0<CR>
+
+" Set vim to remember folds
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
+
+"""" 3. Vim Appearance.
+" Python highlight
+let python_highlight_all=1
+
+" Search settings
+set hlsearch " hilight
+set incsearch " jump to best fit
+
+" Turn off seach hilighting with <CR>.
+nnoremap <CR> :nohlsearch<CR><CR>
+
+" Tab settings
+set autoindent
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
