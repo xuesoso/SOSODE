@@ -52,20 +52,20 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 ### pip installation
 
-Next, you will need to install jupytext and pynvim with pip (Python 3)
+Next, you will need to install jupytext, pynvim, jupyter-console, and jupyter-qtconsole with pip (Python 3)
 ```bash
 pip install jupytext pynvim jupyter-console qtconsole
 ```
 
 Configuration
 -------------
-We can easily link up your existing vimrc configuration to neovim. Just copy over my nvim configuration files over. You can paste and execute the following line in terminal.
+We can easily link up your existing vimrc configuration to neovim. Just copy my nvim configuration files over. You can paste and execute the following line in terminal.
 
 ```bash
 cp -r .config/* ~/.config
 ```
 
-I modified jupyter console to suppress image output when using the inline magic in jupyter console, that way the images don't clump up your whole screen. Include this in your jupyter folder
+I modified jupyter console to suppress image output when using the inline magic in jupyter console, that way the images don't clump up your whole screen. Include this in your jupyter folder. We also need to enable remote input to be fed into jupyter-qtconsole.
 
 ```bash
 mkdir -p ~/.jupyter && cp -r .jupyter/* ~/.jupyter/
