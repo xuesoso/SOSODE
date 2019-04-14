@@ -9,11 +9,11 @@ SOSODE is a neovim-based development environment for interactive data analysis a
 <img src="./images/diagram_1.png" title="Schematic of SOSODE" width="500"/>
 
 Thanks to the contributors who made the following tools, we can turn vim into a powerful IDE for interactive data analysis:
-+ neovim
-+ iron.nvim
-+ pynvim
-+ deoplete
-+ jupytext
++ [neovim](https://neovim.io/)
++ [iron.nvim](https://github.com/Vigemus/iron.nvim)
++ [pynvim](https://github.com/neovim/pynvim)
++ [deoplete](https://github.com/Shougo/deoplete.nvim)
++ [jupytext](https://github.com/mwouts/jupytext)
 
 
 Installation
