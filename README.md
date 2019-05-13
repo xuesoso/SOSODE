@@ -38,7 +38,7 @@ brew install neovim
 sudo pacman -S neovim
 ```
 
-#### **Debian Linux**
+#### **Ubuntu Linux**
 ```bash
 sudo apt-get install neovim
 ```
