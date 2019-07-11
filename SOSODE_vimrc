@@ -25,8 +25,8 @@ Plugin 'Yggdroot/indentLine'
 "Plugin 'Vigemus/iron.nvim'
 
 " Load vimcmdline. This is the suggested plugin to load for jupyter-console /
-" ipython REPL
-Plugin 'jalvesaq/vimcmdline'
+" ipython REPL.
+Plugin 'xuesoso/vimcmdline'
 
 " Load jupytext
 Plugin 'goerz/jupytext.vim'
