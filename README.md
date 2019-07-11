@@ -9,12 +9,16 @@ SOSODE is a neovim-based development environment for interactive data analysis a
 <img src="./images/diagram_1.png" title="Schematic of SOSODE" width="500"/>
 
 Thanks to the contributors who made the following tools, we can turn vim into a powerful IDE for interactive data analysis:
-+ [neovim](https://neovim.io/)
-+ [iron.nvim](https://github.com/Vigemus/iron.nvim)
++ [neovim (Optional if using vimcmdline)](https://neovim.io/)
++ [vimcmdline (forked from jalvesaq/vimcmdline)](https://github.com/xuesoso/vimcmdline.git)
++ [iron.nvim (Alternative)](https://github.com/Vigemus/iron.nvim)
++ [completor](https://github.com/maralla/completor.vim)
 + [pynvim](https://github.com/neovim/pynvim)
-+ [deoplete](https://github.com/Shougo/deoplete.nvim)
 + [jupytext](https://github.com/mwouts/jupytext)
 
+Updates
+-------
++ 7/11/2019: switched REPL interpreter from iron.nvim to vimcmdline because it seems to play nicer with jupyter-console. Also switched from autocompletor to maralla/completor as it is less buggy.
 
 Installation
 ------------
@@ -24,7 +28,7 @@ git clone https://github.com/xuesoso/SOSODE
 ```
 
 
-First, if you don't have neovim, then install [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim). It is an improved vim with much more streamlined code base and has added support for Read-Eval-Print-Loop (REPL) functionality that iron.nvim depends on.
+**Optional**: If you don't have neovim, I suggest installing [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim). It is an improved vim with much more streamlined code base and has added support for Read-Eval-Print-Loop (REPL) functionality that iron.nvim depends on. If you use vimcmdline instead of iron.nvim, you can use either vim 8.0+ or neovim.
 
 ### Summary of neovim installation: 
 
@@ -59,13 +63,13 @@ pip install jupytext pynvim jupyter-console qtconsole
 
 Configuration
 -------------
-We can easily link up your existing vimrc configuration to neovim. Just copy my nvim configuration files over. You can paste and execute the following line in terminal.
+**Optional:** If you installed neovim, we can easily link up your existing vimrc configuration. Just copy my nvim configuration files over. You can paste and execute the following line in terminal.
 
 ```bash
 cp -r .config/* ~/.config
 ```
 
-I modified jupyter console to suppress image output when using the inline magic in jupyter console, that way the images don't clump up your whole screen. Include this in your jupyter folder. We also need to enable remote input to be fed into jupyter-qtconsole.
+I modified jupyter console to suppress image output when using the inline magic in jupyter console, that way the images don't clump up your whole screen. We also need to enable remote input to be fed into jupyter-qtconsole. Run the following bash script in terminal to include to make the relevant changes in jupyter folder. 
 
 ```bash
 mkdir -p ~/.jupyter && cp -r .jupyter/* ~/.jupyter/
@@ -76,7 +80,7 @@ mkdir -p ~/.jupyter && cp -r .jupyter/* ~/.jupyter/
 alias v='nvim -o'
 ```
 
-Finally, to set up the proper plugins you will append my vimrc lines to your own vimrc
+Finally, to set up the proper plugins you will append my vimrc lines to your own vimrc. If you are reinstalling SOSODE, take care to not duplicate lines of vim configurations.
 ```bash
 if [ -e ~/.vimrc ]
 then
@@ -87,7 +91,12 @@ fi
 ```
 
 #### Install all plugins via Vundle
-In nvim, install plugins and run checkhealth
+In vim, install plugins
+```vim
+:PluginInstall<CR>
+```
+
+In nvim, install plugins and also run checkhealth
 ```vim
 :PluginInstall<CR>
 :UpdateRemotePlugins<CR>
@@ -112,11 +121,14 @@ Notebook is automatically converted to an instance of markdown, where cell struc
 Just save as usual in vim (:w<CR>). Jupytext will update the original .ipynb file with changes made in the markdown buffer without altering the outputs in the notebook.
 
 ### Interactive iPython
-#### Execute current line with Alt-d
-By default, pressing Alt-d key will submit the current line of code to an ipython kernel, initiating an instance if it does not yet already exist for your current file. This is done via iron.nvim, and it will automatically detect the current environment you are in.
+#### Initiating the python REPL
+If you are on vimcmdline (default), pressing Leader-s in normal mode will initiate a jupyter-console / ipython kernel. If you are on iron.nvim (alternative), submitting a line of code will automatically initiate an instance if it does not yet already exist for your current file. Both of these REPL plugins should automatically detect the current environment that you are in and point to the correct python.
+
+#### Execute current line with Space
+By default, pressing Space key will submit the current line of code to an ipython kernel.
 
 #### Execute entire cell block with Alt-s
-By default, pressing Alt-s will submit the entire cell block for execution.
+By default, pressing Alt-s will submit the entire cell block for execution encapsulated by cell block markers.
 
 #### Inline plots
 In either your script or jupyter console, you can invoke inline plotting by calling

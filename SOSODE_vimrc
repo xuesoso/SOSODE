@@ -15,14 +15,18 @@ Plugin 'vim-scripts/indentpython.vim'
 " Load indentation checker
 Plugin 'nvie/vim-flake8'
 
-" Load deoplete autocompletor
-Plugin 'Shougo/deoplete.nvim'
+" Load maralla autocompletor
+Plugin 'maralla/completor.vim'
 
 " Load indentLine - displays indentation guide and line
 Plugin 'Yggdroot/indentLine'
 
-" Load iron vim
-Plugin 'Vigemus/iron.nvim'
+" Load iron vim. iron nvim does not play as nice with jupyter-console
+"Plugin 'Vigemus/iron.nvim'
+
+" Load vimcmdline. This is the suggested plugin to load for jupyter-console /
+" ipython REPL
+Plugin 'jalvesaq/vimcmdline'
 
 " Load jupytext
 Plugin 'goerz/jupytext.vim'
@@ -97,6 +101,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " Turn off preview window
 set completeopt-=preview
 
+" Configurations for iron.nvim. Uncomment lines if using iron.nvim
 " I bind <A-d> to automatically execute iron.nvim code
 " on the current line in normal mode, or to all the highlighted
 " lines in visual mode (automatically jumping to the end of the
@@ -104,10 +109,19 @@ set completeopt-=preview
 " I also bind <Alt-s> to automatically run the current cell,
 " defined in .ipynb as the code between ```python and ```
 " We redefine Alt-s
-autocmd FileType python nmap <A-d> 0v$ctr<Esc>0
-autocmd FileType python imap <A-d> <Esc>0v$ctr<Esc>0
-autocmd FileType python vmap <A-d> $ctr<Esc>
-autocmd FileType python nmap <silent> <A-s> m0?```python<CR>jv/```<CR>k$ctr<Esc>:noh<CR>G<C-k>`0:delmarks 0<CR>
+
+"autocmd FileType python nmap <A-d> 0v$ctr<Esc>0
+"autocmd FileType python imap <A-d> <Esc>0v$ctr<Esc>0
+"autocmd FileType python vmap <A-d> $ctr<Esc>
+"autocmd FileType python nmap <silent> <A-s> m0?```python<CR>jv/```<CR>k$ctr<Esc>:noh<CR>G<C-k>`0:delmarks 0<CR>
+
+" Configurations for vimcmdline
+autocmd FileType python nmap <silent> <A-s> m0?```python<CR>jv/```<CR>k<Space>`0:delmarks 0<CR>:nohl<CR>
+autocmd FileType python nmap <silent> <A-Space> m0v/```<CR>k<Space>`0:delmarks 0<CR>:nohl<CR>
+let cmdline_app = {}
+let cmdline_app['python'] = 'jupyter-console'
+let cmdline_follow_colorscheme = 1
+
 
 " Set vim to remember folds
 augroup remember_folds
@@ -133,3 +147,32 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" Use TAB to complete when typing words, else inserts TABs as usual.  Uses
+" dictionary, source files, and completor to find matching words to complete.
+
+" Note: usual completion is on <C-n> but more trouble to press all the time.
+" Never type the same word twice and maybe learn a new spellings!
+" Use the Linux dictionary when spelling is in doubt.
+function! Tab_Or_Complete() abort
+  " If completor is already open the `tab` cycles through suggested completions.
+  if pumvisible()
+    return "\<C-N>"
+  " If completor is not open and we are in the middle of typing a word then
+  " `tab` opens completor menu.
+  elseif col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^[[:keyword:][:ident:]]'
+    return "\<C-R>=completor#do('complete')\<CR>"
+  else
+    " If we aren't typing a word and we press `tab` simply do the normal `tab`
+    " action.
+    return "\<Tab>"
+  endif
+endfunction
+
+" Use `tab` key to select completions.  Default is arrow keys.
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Use tab to trigger auto completion.  Default suggests completions as you type.
+let g:completor_auto_trigger = 1
+inoremap <expr> <Tab> Tab_Or_Complete()
