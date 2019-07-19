@@ -85,7 +85,7 @@ mkdir -p ~/.jupyter && cp -r .jupyter/* ~/.jupyter/
 Finally, to set up the proper plugins you will append my vimrc lines to your own vimrc. If you are reinstalling SOSODE, take care to not duplicate lines of vim configurations.
 ```bash
 mv SOSODE_vimrc $HOME/.SOSODE_vimrc
-vim_call="call SourceDirectory('$HOME/.SOSODE_vimrc')"
+vim_call="source '$HOME/.SOSODE_vimrc'"
 if grep -qF "$vim_call" $HOME/.vimrc;
     then
         echo "vim source line already exists in $HOME/.vimrc";
