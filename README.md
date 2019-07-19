@@ -63,6 +63,12 @@ pip install jupytext pynvim jupyter-console qtconsole
 
 Configuration
 -------------
+**I have added "setup_SOSODE.sh" script to automatically complete some of the following steps. All you need to run in terminal:**
+```bash
+sh setup_SOSODE.sh
+```
+
+<details><summary>Manual setup</summary> <p>
 **Optional:** If you installed neovim, we can easily link up your existing vimrc configuration. Just copy my nvim configuration files over. You can paste and execute the following line in terminal.
 
 ```bash
@@ -75,19 +81,22 @@ I modified jupyter console to suppress image output when using the inline magic 
 mkdir -p ~/.jupyter && cp -r .jupyter/* ~/.jupyter/
 ```
 
+Finally, to set up the proper plugins you will append my vimrc lines to your own vimrc. If you are reinstalling SOSODE, take care to not duplicate lines of vim configurations.
+```bash
+mv SOSODE_vimrc $HOME/.SOSODE_vimrc
+vim_call="call SourceDirectory('$HOME/.SOSODE_vimrc')"
+if grep -qF "$vim_call" $HOME/.vimrc;
+    then
+        echo "vim source line already exists in $HOME/.vimrc";
+    else
+        echo "$vim_call" >> $HOME/.vimrc && echo "added source line to $HOME/.vimrc";
+fi
+```
+</p> </details>
+
 **Optional:** I add in my .bashrc or .bash_profile with an alias to call neovim with "v".
 ```bash
 alias v='nvim -o'
-```
-
-Finally, to set up the proper plugins you will append my vimrc lines to your own vimrc. If you are reinstalling SOSODE, take care to not duplicate lines of vim configurations.
-```bash
-if [ -e ~/.vimrc ]
-then
-    cat SOSODE_vimrc >> ~/.vimrc
-else
-    cp SOSODE_vimrc ~/.vimrc
-fi
 ```
 
 #### Install all plugins via Vundle
