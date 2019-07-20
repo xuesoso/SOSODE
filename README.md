@@ -18,7 +18,7 @@ Thanks to the contributors who made the following tools, we can turn vim into a 
 
 Updates
 -------
-+ 7/19/2019: Added "setup_SOSODE.sh" for automatic setup of configuration. Modularized the config setup. Instead of appending lines from "SOSODE_vimrc" to user .vimrc, we will append call SourceDirectory and keep them separate. This prevents pollution of the user's original vimrc, and is much easier for uninstallation / reinstallation of SOSODE configuration.
++ 7/19/2019: Added "setup_SOSODE.sh" for automatic setup of configuration. Modularized the config setup. Instead of appending lines from "SOSODE_vimrc" to user .vimrc, we will keepe SOSODE_vimrc separate and append a source call in the user vimrc. This prevents pollution of the user's original vimrc, and is much easier for uninstallation / reinstallation of SOSODE configuration.
 + 7/11/2019: switched REPL interpreter from iron.nvim to vimcmdline because it seems to play nicer with jupyter-console. Also switched from autocompletor to maralla/completor as it is less buggy.
 
 Installation
