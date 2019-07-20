@@ -48,6 +48,16 @@ sudo pacman -S neovim
 sudo apt-get install neovim
 ```
 
+Configuration
+-------------
+**I have added "setup_SOSODE.sh" script to automatically complete some of the following steps. All you need to run in terminal:**
+```bash
+sh setup_SOSODE.sh
+```
+
+<details><summary>Manual setup</summary> <p>
+**Optional:** If you installed neovim, we can easily link up your existing vimrc configuration. Just copy my nvim configuration files over. You can paste and execute the following line in terminal.
+
 ### Install vundle for vim plugin management
 If you don't already have a plugin management system for vim, then I highly recommend installing vundle.
 
@@ -61,16 +71,6 @@ Next, you will need to install jupytext, pynvim, jupyter-console, and jupyter-qt
 ```bash
 pip install jupytext pynvim jupyter-console qtconsole
 ```
-
-Configuration
--------------
-**I have added "setup_SOSODE.sh" script to automatically complete some of the following steps. All you need to run in terminal:**
-```bash
-sh setup_SOSODE.sh
-```
-
-<details><summary>Manual setup</summary> <p>
-**Optional:** If you installed neovim, we can easily link up your existing vimrc configuration. Just copy my nvim configuration files over. You can paste and execute the following line in terminal.
 
 ```bash
 cp -r .config/* ~/.config
