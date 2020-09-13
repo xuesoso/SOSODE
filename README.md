@@ -18,7 +18,7 @@ Thanks to the contributors who made the following tools, we can turn vim into a 
 
 Updates
 -------
-+ 7/19/2019: Added "setup_SOSODE.sh" for automatic setup of configuration. Modularized the config setup. Instead of appending lines from "SOSODE_vimrc" to user .vimrc, we will keepe SOSODE_vimrc separate and append a source call in the user vimrc. This prevents pollution of the user's original vimrc, and is much easier for uninstallation / reinstallation of SOSODE configuration.
++ 7/19/2019: Added "setup_SOSODE.sh" for automatic setup of configuration. Modularized the config setup. Instead of appending lines from "SOSODE_vimrc" to user .vimrc, we will keep SOSODE_vimrc separate and append a source call in the user vimrc. This prevents pollution of the user's original vimrc, and is much easier for uninstallation / reinstallation of SOSODE configuration.
 + 7/11/2019: switched REPL interpreter from iron.nvim to vimcmdline because it seems to play nicer with jupyter-console. Also switched from autocompletor to maralla/completor as it is less buggy.
 
 Installation
@@ -38,12 +38,12 @@ git clone https://github.com/xuesoso/SOSODE
 brew install neovim
 ```
 
-#### **Arch Linux**
+#### **Arch/Manjaro Linux**
 ```bash
 sudo pacman -S neovim
 ```
 
-#### **Ubuntu Linux**
+#### **Ubuntu/Debian Linux**
 ```bash
 sudo apt-get install neovim
 ```
@@ -125,7 +125,7 @@ You can edit an jupyter-notebook (*.ipynb) by simply calling
 nvim notebook.ipynb
 ```
 
-Notebook is automatically converted to an instance of markdown, where cell structures are encapsulated by markdown code block. You can edit the code and text in this markdown buffer. By default, the markdown will be shown with python syntax.
+Notebook is automatically converted to markdown, where cell structures are encapsulated by markdown code block. You can edit the code and text in this markdown buffer. By default, the markdown will be shown with python syntax.
 
 ### Saving jupyter-notebook 
 Just save as usual in vim (:w<CR>). Jupytext will update the original .ipynb file with changes made in the markdown buffer without altering the outputs in the notebook.
@@ -147,4 +147,29 @@ In either your script or jupyter console, you can invoke inline plotting by call
 %qtconsole
 ```
 This will link an instance of jupyter-qtconsole to ipython kernel and allows inline display of figures. You can also save all the interactions as html using the embedded jupyter-qtconsole function.
+
+Additional tools that I find useful
+-----
+
+#### Asynchronous VSCode-like language support, hinting, and linting
+Check out plugins [coc.nvim](https://github.com/neoclide/coc.nvim) and its python extension called [coc-python](https://github.com/neoclide/coc-python). Requires neovim and takes a little bit of time to set up for the first time, but the result is well worth it.
+
+**Package method suggestion**
+
+<img src="./images/screenshot_coc_nvim.png" title="Path suggestion" width="500"/>
+
+**Path suggestion**
+
+<img src="./images/screenshot_coc_nvim_2.png" title="Path suggestion" width="500"/>
+
+#### Ranger + Ueberzug for in terminal plot viewing
+I like to view my plots inside terminal without having to open another program. [Ranger](https://github.com/ranger/ranger) and [Ueberzug](https://github.com/seebye/ueberzug) are great tools to achieve that.
+
+**Viewing plots in terminal**
+
+<img src="./images/screenshot_ranger.png" title="Path suggestion" width="500"/>
+
+
+
+
 
