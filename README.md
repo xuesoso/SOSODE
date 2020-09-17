@@ -169,7 +169,9 @@ I like to view my plots inside terminal without having to open another program. 
 
 <img src="./images/screenshot_ranger.png" title="Path suggestion" width="500"/>
 
-
+#### Known issues
+**Gnome + ipython**: On Gnome 3.34 or more recent version of its desktop environment, subprocess ownership is different than other desktop environments. What this means is that when you close a terminal application or vim window pane that is running ipython / jupyter_console, the orphaned frontend will not shut down on its own which can cause additional resource usage. You would not notice unless you check on your process list. I would test by opening a ipython / jupyter_console kernel and force close the terminal app that it's running on. Next type and enter "ps aux | grep 'ipykernel'" and see if it returns a running process in the background. If it shows then that means the kernel is still running despite its parent process being killed just now.
+This happens because of the different way in which Gnome 3.34+ handles orphaned processes and that "ipykernel" assumes init as the root parent for all processes (which is not true in Gnome 3.34+). For more details on this issue, you can see [here](https://github.com/ipython/ipykernel/issues/517). A solution for now would be to close down the ipython/jupyter_console frontend with "quit" command in its console.
 
 
 
