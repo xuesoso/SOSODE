@@ -163,7 +163,7 @@ Check out plugins [coc.nvim](https://github.com/neoclide/coc.nvim) and its pytho
 <img src="./images/screenshot_coc_nvim_2.png" title="Path suggestion" width="500"/>
 
 #### Ranger + Ueberzug for in terminal plot viewing
-I like to view my plots inside terminal without having to open another program. [Ranger](https://github.com/ranger/ranger) and [Ueberzug](https://github.com/seebye/ueberzug) are great tools to achieve that.
+I like to view my plots inside terminal without having to open another program. [Ranger](https://github.com/ranger/ranger) and [Ueberzugpp](https://github.com/jstkdng/ueberzugpp) (original Ueberzug is no longer maintained) are great tools to achieve that. Terminals like Kitty or iTerm2 also offer their own protocols to display images.
 
 **Viewing plots in terminal**
 
