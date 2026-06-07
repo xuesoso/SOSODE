@@ -141,6 +141,28 @@ By default, pressing Space key will submit the current line of code to an ipytho
 By default, pressing Alt-s will submit the entire cell block for execution encapsulated by cell block markers.
 
 #### Inline plots
+
+**Recommended: [plotty](https://github.com/xuesoso/plotty)**
+
+[plotty](https://github.com/xuesoso/plotty) is a matplotlib backend I wrote that renders plots as sixel graphics directly inside a dedicated tmux pane next to your REPL. Because only the rendered sixel bytes cross the connection, it works locally, over SSH, and in nested (local → ssh → remote) tmux sessions. It requires `tmux >= 3.4` built with sixel support and a sixel-capable terminal (e.g. WezTerm, iTerm2, VSCode, Konsole, xterm, xfce-terminal).
+
+```bash
+pip install plotty
+```
+
+Then, in your script or jupyter console session:
+```python
+import plotty
+plotty.enable()  # targets the last tmux pane by default; e.g. plotty.enable(target_pane="-1", size=60)
+
+import matplotlib.pyplot as plt
+plt.plot([1, 4, 9, 16])  # shows up in the plot pane
+```
+
+<img src="./images/plotty_demo.jpg" title="plotty inline plots in a tmux pane" width="500"/>
+
+**Alternative: jupyter-qtconsole**
+
 In either your script or jupyter console, you can invoke inline plotting by calling
 ```python
 %matplotlib inline
@@ -162,8 +184,8 @@ Check out plugins [coc.nvim](https://github.com/neoclide/coc.nvim) and its pytho
 
 <img src="./images/screenshot_coc_nvim_2.png" title="Path suggestion" width="500"/>
 
-#### Ranger + Ueberzug for in terminal plot viewing
-I like to view my plots inside terminal without having to open another program. [Ranger](https://github.com/ranger/ranger) and [Ueberzugpp](https://github.com/jstkdng/ueberzugpp) (original Ueberzug is no longer maintained) are great tools to achieve that. Terminals like Kitty or iTerm2 also offer their own protocols to display images.
+#### Ranger + Ueberzug for in terminal plot viewing (no longer recommended)
+I previously used [Ranger](https://github.com/ranger/ranger) and [Ueberzugpp](https://github.com/jstkdng/ueberzugpp) (original Ueberzug is no longer maintained) to view plots inside the terminal without opening another program. I no longer recommend this approach: it does not work over SSH and is unreliable within tmux across different operating systems. For inline plot viewing, use [plotty](#inline-plots) instead. Terminals like Kitty or iTerm2 also offer their own protocols to display images.
 
 **Viewing plots in terminal**
 
